@@ -12,7 +12,7 @@ nvt for free MD
   ntb=1,
   ntt=3,
   gamma_ln=2.0,
-  tempi=0.0,
+  tempi=2.0,
   temp0=300.0,
   ntpr=5000,
   ntwr=5000,
@@ -23,7 +23,7 @@ nvt for free MD
   nmropt=1,
   ntr=1, restraintmask='!:WAT', restraint_wt=5,
 /
-&wt TYPE='TEMP0', istep1=0, istep2=190000, value1=0.0, value2=300.0 /
+&wt TYPE='TEMP0', istep1=0, istep2=190000, value1=2.0, value2=300.0 /
 &wt TYPE='TEMP0', istep1=190001, istep2=200000, value1=300.0, value2=300.0 /
 &wt TYPE='DUMPFREQ', istep1=10000, /
 &wt TYPE='END', /
