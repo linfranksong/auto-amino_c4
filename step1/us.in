@@ -1,0 +1,20 @@
+ &cntrl 
+   nstlim=2000000, nscm=1000,
+   ntx=5, irest=1, ntpr=1000,
+   tempi=300.0, temp0=300.0, ntt=3, gamma_ln=2.0,
+   ntb=1, igb=0, cut=10.0,
+   dt=0.001, ig=-1,
+   ntc=2, ntf=2,
+   iwrap=0,
+   ntwr=1000, ntwx=50000, ntave=1000,
+   ioutfm=1, ntwv=0,
+   ifsc = 0, icfe=1, 
+   clambda=XXX,
+   timask1=':AAA', 
+   timask2=':BBB', crgmask = ':BBB',
+   nmropt=1,
+/
+&wt TYPE='DUMPFREQ', istep1=500, /
+&wt TYPE='END', /
+DISANG=dis.RST
+DUMPAVE=us.log

@@ -1,0 +1,27 @@
+md for free MD
+ &cntrl 
+  imin=0,
+  irest=1,
+  ntx=5,
+  nstlim=500000,
+  dt=0.001,
+  cut=10.0,
+  ntc=1,
+  ntf=1,
+  ntb=1,
+  ntt=3,
+  gamma_ln=2.0,
+  tempi=300.0,
+  temp0=300.0,
+  ntpr=5000,
+  ntwr=5000,
+  ntwx=5000,
+  ntwv=0,
+  ioutfm=1,
+  iwrap=0,
+  nmropt=1,
+/
+&wt TYPE='DUMPFREQ', istep1=400, /
+&wt TYPE='END', /
+DISANG=dis.RST
+DUMPAVE=us.log

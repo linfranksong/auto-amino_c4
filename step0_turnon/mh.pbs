@@ -1,0 +1,32 @@
+#!/bin/bash
+#SBATCH -A merzjrke
+#SBATCH -J m0
+#SBATCH -e test.err
+#SBATCH -o test.out
+#SBATCH --nodes=1             ### Node count required for the job
+#SBATCH --ntasks-per-node=1   ### Nuber of tasks to be launched per Node     
+#SBATCH --gres=gpu:1          ### General REServation of gpu:number of gpus
+#SBATCH --mem=8G
+#SBATCH --time=2:00:00
+  
+echo $SLURM_SUBMIT_DIR
+cd $SLURM_SUBMIT_DIR
+
+#-------------- Load Modules ------------------
+ulimit -c 0
+ml -* GCC/9.3.0 CUDA/11.0.207 OpenMPI/4.0.3 CMake powertools Conda
+source /mnt/home/songlin3/AMBER20/amber20/amber.sh
+
+exe=$AMBERHOME/bin/pmemd.cuda
+
+#-------------- Run job -----------------------
+echo 'RUN AMBER JOB'
+# running command
+$exe -O -i min.in -o min.out -c 1264.inpcrd -p 1264.prmtop -r min.rst -x min.netcdf -inf min.mdinfo -ref 1264.inpcrd
+$exe -O -i heat.in -o heat.out -c min.rst -p 1264.prmtop -r heat.rst -x heat.netcdf -inf heat.mdinfo -ref min.rst
+if grep "Total wall time" heat.out;then
+   sbatch eq.pbs
+else
+   sbatch mh.pbs
+fi
+echo 'FINISH JOB, SAVE IT TO SCRATCH'

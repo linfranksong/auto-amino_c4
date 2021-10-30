@@ -1,0 +1,22 @@
+ &cntrl 
+   nstlim=1000000, nscm=1000,
+   ntx=5, irest=1, ntpr=1000,
+   tempi=300.0, temp0=300.0, ntt=3, gamma_ln=2.0,
+   ntp=1, pres0=1.01325, taup=5.0,
+   barostat=2,mcbarint=25,
+   ntb=2, igb=0, cut=10.0,
+   dt=0.001, ig=-1,
+   ntc=1, ntf=1,
+   iwrap=0,
+   ntwr=1000, ntwx=50000, ntave=1000,
+   ioutfm=1, ntwv=0,
+   ifsc = 1, icfe=1, 
+   clambda=XXX,
+   timask1=':AAA', scmask1=':AAA', scmask2=':BBB',
+   timask2=':BBB', crgmask = ':AAA',
+   nmropt=1,
+/
+ &wt TYPE='DUMPFREQ', istep1=10000, /
+ &wt TYPE='END', /
+ DISANG=dis.RST
+ DUMPAVE=eq.log

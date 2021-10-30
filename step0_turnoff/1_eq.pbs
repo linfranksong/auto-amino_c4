@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH -A merzjrke
+##SBATCH --mail-user=songlin3@msu.edu
+##SBATCH --mail-type=FAIL
+#SBATCH -J e1.0
+#SBATCH -e test.err
+#SBATCH -o test.out
+#SBATCH -N 1 -c 1 --gres=gpu:1
+#SBATCH --mem=8G
+#SBATCH --time=3:30:00
+
+echo $SLURM_SUBMIT_DIR
+cd $SLURM_SUBMIT_DIR
+
+#-------------- Load Modules ------------------
+ulimit -c 0
+ml -* GCC/9.3.0 CUDA/11.0.207 OpenMPI/4.0.3 CMake powertools Conda
+source /mnt/home/songlin3/AMBER20/amber20/amber.sh
+
+exe=$AMBERHOME/bin/pmemd.cuda                  
+
+#-------------- Run job -----------------------
+echo 'RUN AMBER JOB'
+# running command
+$exe -O -i eq.in -o eq.out -c heat.rst -p 1264.prmtop -r eq.rst -x eq.netcdf -inf eq.mdinfo -ref heat.rst
+if grep "Total wall time" eq.out;then
+   sbatch us.pbs
+   cp eq.rst ../NNN/XXX.rst
+   cd ../NNN/
+   sbatch eq.pbs
+else
+   sbatch eq.pbs
+fi

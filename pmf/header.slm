@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH -A merzjrke
+#SBATCH -J XXXXXXXXX
+#SBATCH -e test.err
+#SBATCH -o test.out
+#SBATCH --nodes=1             ### Node count required for the job
+#SBATCH --ntasks-per-node=4   ### Nuber of tasks to be launched per Node     
+#SBATCH --gres=gpu:1          ### General REServation of gpu:number of gpus
+#SBATCH --mem=32G
+#SBATCH --time=3:30:00
+
+echo $SLURM_SUBMIT_DIR
+cd $SLURM_SUBMIT_DIR
+
+#-------------- Load Modules ------------------
+ulimit -c 0
+ml -* GCC/9.3.0 CUDA/11.0.207 OpenMPI/4.0.3 CMake powertools Conda
+source /mnt/home/songlin3/AMBER20/amber20/amber.sh
+
+### command line ###
+
+

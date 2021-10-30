@@ -1,0 +1,24 @@
+minimization
+ &cntrl
+  imin=1,
+  ntmin=2,
+  maxcyc=20000,
+  cut=10.0,
+  ntc=1,
+  ntf=1,
+  ntb=1,
+  ntpr=5000,
+  ntwr=5000,
+  ntwx=2000,
+  ioutfm=1,
+  iwrap=0,
+  ifsc = 1, icfe=1, 
+  clambda=XXX,
+  timask1=':AAA', scmask1=':AAA', scmask2=':BBB',
+  timask2=':BBB', crgmask = ':AAA',
+  nmropt=1,
+/
+&wt TYPE='DUMPFREQ', istep1=10000, /
+&wt TYPE='END', /
+DISANG=dis.RST
+DUMPAVE=min.log

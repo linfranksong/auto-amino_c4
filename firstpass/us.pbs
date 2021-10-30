@@ -1,0 +1,51 @@
+#!/bin/bash
+#SBATCH -A merzjrke
+##SBATCH --mail-user=songlin3@msu.edu
+##SBATCH --mail-type=FAIL
+#SBATCH -J uXXX
+#SBATCH -e test.err
+#SBATCH -o test.out
+#SBATCH -N 1 -c 1 --gres=gpu:1
+#SBATCH --mem=8G
+#SBATCH --time=4:30:00
+
+echo $SLURM_SUBMIT_DIR
+cd $SLURM_SUBMIT_DIR
+
+#-------------- Load Modules ------------------
+ulimit -c 0
+ml -* GCC/9.3.0 CUDA/11.0.207 OpenMPI/4.0.3 CMake powertools Conda
+source /mnt/home/songlin3/AMBER20/amber20/amber.sh
+
+exe=$AMBERHOME/bin/pmemd.cuda                  
+
+#-------------- Run job -----------------------
+echo 'RUN AMBER JOB'
+# running command
+$exe -O -i us.in -o us.out -c eq.rst -p 1264.prmtop -r us.rst -x us.netcdf -inf us.mdinfo -ref eq.rst
+if grep "Total wall time" us.out;then
+   echo "done"
+   cpptraj 1264.prmtop < ptraj.in > ptraj.out
+   sh cal.sh
+   dis=`awk 'NR>1 {sum+=$2} END {print sum/(FNR-1)}' bond.txt`
+   ang=`awk 'NR>1 {su+=$2} END {print su/(FNR-1)}' angle.txt`
+   dihe=`awk 'NR>1 {s+=$2} END {print s/(FNR-1)}' dihedral.txt`
+
+   if (( $(echo "$dis > 3.0" |bc -l) ));then
+     pol=$( awk '$1=="MUTE"  {print $2}' *txt )
+     A=$(echo "$pol + 1.0"| bc -l)
+     rm *out *netcdf *rst *mdinfo
+     mv $pol'.txt' $A'.txt'
+     sed -i "s/MUTE  $pol/MUTE  $A/g" $A'.txt'
+     sed -i "s/polfile $pol/polfile $A/g" addc4.in
+     sed -i "s/EEEEE $pol/EEEEE $A/g" ../input.in
+     parmed -i addc4.in
+     sbatch mh.pbs
+   else
+     pol=$( awk '$1=="MUTE"  {print $2}' *txt )
+     echo "minimum polarizability is $pol"
+   fi
+
+else
+   sbatch us.pbs
+fi
