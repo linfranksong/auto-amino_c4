@@ -17,8 +17,6 @@ us_window_restraint 1.8 5.0 200 5.0 11.01 100
 test_us_md_steps 100000
 us_window_optimize 1.8 11.01 10
 center_deviation 1.6
-us_min_steps  20000
-us_nvt_steps 100000
 us_npt_steps 1000000
 us_md_steps  4000000
 slm_header header.slm
