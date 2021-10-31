@@ -5,17 +5,17 @@ coord_type distance
 coord_atm1_num HZ_ATOMID1
 coord_atm2_num COORD_ATOMID1
 forward_limit 11.01
-reverse_limit 2.22
+reverse_limit REVERSE_LIMIT
 md_min_steps  20000
 md_nvt_steps 100000
 md_npt_steps 500000
 md_md_steps  500000
 smd_forward_md_steps  500000
 smd_reverse_md_steps  500000
-us_window_space 2.22 5.0 0.05 5.0 11.01 0.1
-us_window_restraint 2.22 5.0 200 5.0 11.01 100
+us_window_space REVERSE_LIMIT 5.0 0.05 5.0 11.01 0.1
+us_window_restraint REVERSE_LIMIT 5.0 200 5.0 11.01 100
 test_us_md_steps 100000
-us_window_optimize 2.22 11.01 30
+us_window_optimize REVERSE_LIMIT 11.01 30
 center_deviation 1.6
 us_npt_steps 1000000
 us_md_steps  4000000
