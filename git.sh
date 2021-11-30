@@ -10,4 +10,6 @@ git remote add origin https://github.com/linfranksong/auto-amino_c4.git
 
 git remote -v
 
+git pull
+
 git push -u origin main
