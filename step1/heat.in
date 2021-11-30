@@ -8,7 +8,7 @@ nvt for free MD
   dt=0.001,
   cut=10.0,
   ntc=2,
-  ntf=2,
+  ntf=1,
   ntb=1,
   ntt=3,
   gamma_ln=2.0,

@@ -5,7 +5,7 @@ minimization
   ncyc=10000,
   cut=10.0,
   ntc=2,
-  ntf=2,
+  ntf=1,
   ntb=1,
   ntpr=5000,
   ntwr=5000,

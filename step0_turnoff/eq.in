@@ -6,7 +6,7 @@ npt for free MD
   nstlim=500000,
   dt=0.001,
   cut=10.0,
-  ntc=1,
+  ntc=2,
   ntf=1,
   ntp=1,
   pres0=1.01325,

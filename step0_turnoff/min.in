@@ -4,7 +4,7 @@ minimization
   maxcyc=20000,
   ncyc=10000,
   cut=10.0,
-  ntc=1,
+  ntc=2,
   ntf=1,
   ntb=1,
   ntpr=5000,

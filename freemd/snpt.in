@@ -6,7 +6,7 @@
    barostat=2,mcbarint=25,
    ntb=2, igb=0, cut=10.0,
    dt=0.001, ig=-1,
-   ntc=1, ntf=1,
+   ntc=2, ntf=2,
    iwrap=0,
    ntwr=1000, ntwx=5000, ntave=1000,
    ioutfm=1, ntwv=0,
